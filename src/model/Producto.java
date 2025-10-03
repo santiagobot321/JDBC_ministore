@@ -1,34 +1,56 @@
 package model;
 
-import java.math.BigDecimal;
-
 public class Producto {
-    private int id;
+
+    private Integer id;
     private String nombre;
-    private BigDecimal precio;
-    private int stock;
+    private double precio;
+    private Integer stock;
 
-    public Producto(int id, String nombre, BigDecimal precio, int stock) {
+    public Producto(Integer id, String nombre, double precio, Integer stock) {
         this.id = id;
+        setNombre(nombre);
+        setPrecio(precio);
+        setStock(stock);
+    }
+
+    public Integer getId() {
+        return id;
+    }
+
+    public String getNombre() {
+        return nombre;
+    }
+
+    public double getPrecio() {
+        return precio;
+    }
+
+    public Integer getStock() {
+        return stock;
+    }
+
+    public void setNombre(String nombre) {
+        if (nombre == null || nombre.trim().isEmpty()) {
+            throw new IllegalArgumentException("Nombre invalido");
+        }
         this.nombre = nombre;
+    }
+
+    public void setPrecio(double precio) {
+        if (precio <= 0) {
+            throw new IllegalArgumentException("Precio inválido");
+        }
         this.precio = precio;
+    }
+
+    public void setStock(Integer stock) {
+        if (stock <= 0) {
+            throw new IllegalArgumentException("Stock invalido");
+        }
         this.stock = stock;
     }
 
-    public Producto(String nombre, BigDecimal precio, int stock) {
-        this.nombre = nombre;
-        this.precio = precio;
-        this.stock = stock;
+    public void setId(int idGenerado) {
     }
-
-    // getters y setters
-    public int getId() { return id; }
-    public String getNombre() { return nombre; }
-    public BigDecimal getPrecio() { return precio; }
-    public int getStock() { return stock; }
-
-    public void setId(int id) { this.id = id; }
-    public void setNombre(String nombre) { this.nombre = nombre; }
-    public void setPrecio(BigDecimal precio) { this.precio = precio; }
-    public void setStock(int stock) { this.stock = stock; }
 }

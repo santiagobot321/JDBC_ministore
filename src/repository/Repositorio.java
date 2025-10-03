@@ -1,11 +1,19 @@
 package repository;
 
+import model.Producto;
+
 import java.util.List;
 
-public interface Repositorio<T> {
-    void crear(T entidad);
-    T buscarPorId(Integer id);
-    List<T> buscarTodos();
-    void actualizar(T entidad);
+public interface Repositorio {
+
+    Producto crearProducto(Producto producto);
+
+    Producto buscarPorId(Integer id);
+
+    List<Producto> buscarTodos();
+
+    void actualizarProducto(Producto producto);
+
     void eliminar(Integer id);
+
 }

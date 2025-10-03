@@ -3,30 +3,31 @@ package util;
 import java.io.InputStream;
 import java.sql.Connection;
 import java.sql.DriverManager;
+import java.sql.SQLException;
 import java.util.Properties;
+import java.io.IOException;
 
 public class ConnectionFactory {
 
-    public static Connection getConnection() {
-        try (InputStream input = ConnectionFactory.class.getResourceAsStream("/db.properties")) {
+    public static Connection getConnection() throws SQLException {
+
+        Properties prop = new Properties();
+
+
+        try(InputStream input = ConnectionFactory.class.getClassLoader().getResourceAsStream("db.properties")) {
             if (input == null) {
-                throw new RuntimeException("No se encontró el archivo db.properties en resources");
+                throw new RuntimeException("No se encontró el archivo db.properties en el classpath");
             }
-
-            Properties props = new Properties();
-            props.load(input);
-
-            String url = props.getProperty("url");
-            String user = props.getProperty("user");
-            String password = props.getProperty("password");
-            String driver = props.getProperty("driver");
-
-            Class.forName(driver);
-
-            return DriverManager.getConnection(url, user, password);
-
-        } catch (Exception e) {
-            throw new RuntimeException("Error cargando conexión: " + e.getMessage(), e);
+            prop.load(input);
+        } catch (IOException e) {
+            throw new RuntimeException("Error al leer el archivo db.properties",e);
         }
+
+        String url = prop.getProperty("url");
+        String user = prop.getProperty("user");
+        String password = prop.getProperty("password");
+
+        return DriverManager.getConnection(url,user,password);
+
     }
 }
