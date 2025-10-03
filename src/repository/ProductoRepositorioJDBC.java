@@ -2,7 +2,6 @@ package repository;
 
 import model.Producto;
 import util.ConnectionFactory;
-
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
@@ -152,6 +151,4 @@ public class ProductoRepositorioJDBC implements Repositorio {
             throw new RuntimeException("Error al eliminar el producto con id: " + id, e);
         }
     }
-
-
 }

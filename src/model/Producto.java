@@ -51,6 +51,8 @@ public class Producto {
         this.stock = stock;
     }
 
-    public void setId(int idGenerado) {
+    public void setId(Integer idGenerado) {
+        this.id = idGenerado;
     }
+
 }

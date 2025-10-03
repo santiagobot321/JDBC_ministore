@@ -12,7 +12,7 @@ public interface Repositorio {
 
     List<Producto> buscarTodos();
 
-    void actualizarProducto(Producto producto);
+    Producto actualizarProducto(Producto producto);
 
     void eliminar(Integer id);
 
